@@ -21,6 +21,47 @@ users = sqlalchemy.Table(
     sqlalchemy.Column("username", sqlalchemy.String(128)),
 )
 
+FAQ = sqlalchemy.Table(
+    "FAQ",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, autoincrement=True),
+    sqlalchemy.Column("question", sqlalchemy.String(128)),
+    sqlalchemy.Column("answer", sqlalchemy.String(1280)),
+)
+
+Promotion = sqlalchemy.Table(
+    "Promotion",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, autoincrement=True),
+    sqlalchemy.Column("question", sqlalchemy.String(128)),
+    sqlalchemy.Column("answer", sqlalchemy.String(1280)),
+)
+
+Partner = sqlalchemy.Table(
+    "Partner",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, autoincrement=True),
+    sqlalchemy.Column("partner", sqlalchemy.String(128)),
+    sqlalchemy.Column("description", sqlalchemy.String(1280)),
+)
+
+
+Contact = sqlalchemy.Table(
+    "Contact",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, autoincrement=True),
+    sqlalchemy.Column("Contact", sqlalchemy.String(128)),
+    sqlalchemy.Column("Contact_link", sqlalchemy.String(1280)),
+)
+
+Link = sqlalchemy.Table(
+    "Link",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, autoincrement=True),
+    sqlalchemy.Column("link_name", sqlalchemy.String(128)),
+    sqlalchemy.Column("link_url", sqlalchemy.String(1280)),
+)
+
 # Создаем таблицы
 metadata.create_all(engine)
 

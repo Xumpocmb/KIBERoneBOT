@@ -6,7 +6,7 @@ from tg_bot.bot_db import database
 from tg_bot.bot_logger import logger
 from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher
-from tg_bot.handlers import handler_start
+from tg_bot.handlers import handler_start, handler_faq
 from tg_bot.utils.set_commands import set_main_menu
 
 
@@ -22,6 +22,7 @@ async def lifespan(application: FastAPI):
     await database.connect()
     logger.info("Database connection established.")
     dp.include_router(handler_start.router)
+    dp.include_router(handler_faq.router)
     dp.startup.register(set_main_menu)
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
