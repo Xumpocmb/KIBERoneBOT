@@ -64,3 +64,4 @@ venv.bak/
 *.exe
 *.sqlite3
 *.db
+*.exe

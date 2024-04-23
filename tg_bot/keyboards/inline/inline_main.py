@@ -18,7 +18,7 @@ button_4: InlineKeyboardButton = InlineKeyboardButton(
 
 button_5: InlineKeyboardButton = InlineKeyboardButton(
     text='Наши Акции',
-    callback_data='button_4_pressed')
+    callback_data='promo')
 
 button_6: InlineKeyboardButton = InlineKeyboardButton(
     text='Наши Партнёры',
@@ -46,6 +46,18 @@ main_inline: InlineKeyboardMarkup = InlineKeyboardMarkup(
         ],
         [
             button_4
+        ],
+[
+            button_5
+        ],
+[
+            button_6
+        ],
+[
+            button_7
+        ],
+[
+            button_8
         ],
     ]
 )
