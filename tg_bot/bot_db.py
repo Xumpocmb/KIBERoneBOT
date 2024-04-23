@@ -62,6 +62,18 @@ Link = sqlalchemy.Table(
     sqlalchemy.Column("link_url", sqlalchemy.String(1280)),
 )
 
+
+Manager = sqlalchemy.Table(
+    "Manager",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, autoincrement=True),
+    sqlalchemy.Column("city", sqlalchemy.String(128)),
+    sqlalchemy.Column("location", sqlalchemy.String(1280)),
+    sqlalchemy.Column("manager", sqlalchemy.String(1280)),
+    sqlalchemy.Column("link", sqlalchemy.String(1280)),
+)
+
+
 # Создаем таблицы
 metadata.create_all(engine)
 

@@ -22,15 +22,15 @@ button_5: InlineKeyboardButton = InlineKeyboardButton(
 
 button_6: InlineKeyboardButton = InlineKeyboardButton(
     text='Наши Партнёры',
-    callback_data='button_4_pressed')
+    callback_data='partner')
 
 button_7: InlineKeyboardButton = InlineKeyboardButton(
     text='Контакты',
-    callback_data='button_4_pressed')
+    callback_data='contact')
 
 button_8: InlineKeyboardButton = InlineKeyboardButton(
     text='Социальные сети',
-    callback_data='button_4_pressed')
+    callback_data='link')
 
 # Создаем объект inline-клавиатуры
 main_inline: InlineKeyboardMarkup = InlineKeyboardMarkup(

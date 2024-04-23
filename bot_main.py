@@ -8,7 +8,8 @@ from fastapi import FastAPI
 
 from tg_bot.bot_db import database
 from tg_bot.bot_logger import logger
-from tg_bot.handlers import handler_start, handler_faq, handler_inline_main, handler_promo
+from tg_bot.handlers import handler_start, handler_faq, handler_inline_main, handler_promo, handler_partner, \
+    handler_link, handler_contact
 from tg_bot.utils.set_commands import set_main_menu
 
 load_dotenv()
@@ -31,6 +32,9 @@ async def lifespan(application: FastAPI):
     dp.include_router(handler_start.router)
     dp.include_router(handler_faq.router)
     dp.include_router(handler_promo.router)
+    dp.include_router(handler_partner.router)
+    dp.include_router(handler_link.router)
+    dp.include_router(handler_contact.router)
     dp.include_router(handler_inline_main.router)
     dp.startup.register(set_main_menu)
     await bot.delete_webhook(drop_pending_updates=True)
@@ -64,4 +68,3 @@ if __name__ == "__main__":
         uvicorn.run('bot_main:app', host="127.0.0.1", port=8000, reload=True, log_level="debug")
     else:
         uvicorn.run('bot_main:app', host='0.0.0.0', port=8000, log_level="debug")
-
