@@ -65,3 +65,4 @@ venv.bak/
 *.sqlite3
 *.db
 *.exe
+*.pdf

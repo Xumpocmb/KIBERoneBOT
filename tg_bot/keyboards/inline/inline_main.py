@@ -10,11 +10,11 @@ button_2: InlineKeyboardButton = InlineKeyboardButton(
 
 button_3: InlineKeyboardButton = InlineKeyboardButton(
     text='Назначить отработку',
-    callback_data='button_3_pressed')
+    callback_data='contact')
 
 button_4: InlineKeyboardButton = InlineKeyboardButton(
     text='Платформа английского Lim English',
-    callback_data='button_4_pressed')
+    callback_data='english_platform')
 
 button_5: InlineKeyboardButton = InlineKeyboardButton(
     text='Наши Акции',

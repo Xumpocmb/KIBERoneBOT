@@ -74,6 +74,17 @@ Manager = sqlalchemy.Table(
 )
 
 
+Group = sqlalchemy.Table(
+    "Group",
+    metadata,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, autoincrement=True),
+    sqlalchemy.Column("FIO", sqlalchemy.String(128)),
+    sqlalchemy.Column("group", sqlalchemy.String(1280)),
+    sqlalchemy.Column("location", sqlalchemy.String(1280)),
+    sqlalchemy.Column("city", sqlalchemy.String(1280)),
+)
+
+
 # Создаем таблицы
 metadata.create_all(engine)
 
