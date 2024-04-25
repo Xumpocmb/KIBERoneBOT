@@ -21,11 +21,11 @@ DOMAIN = os.getenv("DOMAIN")
 bot: Bot = Bot(token=BOT_TOKEN)
 dp: Dispatcher = Dispatcher()
 
-WEBHOOK_PATH = f"/bot/{BOT_TOKEN}"
+WEBHOOK_PATH = f'/bot/{BOT_TOKEN}'
 if DEBUG:
-    WEBHOOK_URL = f"{NGROK}{WEBHOOK_PATH}"
+    WEBHOOK_URL = f'{NGROK}{WEBHOOK_PATH}'
 else:
-    WEBHOOK_URL = f"{DOMAIN}{WEBHOOK_PATH}"
+    WEBHOOK_URL = f'{DOMAIN}{WEBHOOK_PATH}'
 
 
 @asynccontextmanager
@@ -78,6 +78,8 @@ async def bot_webhook(update: dict):
 
 if __name__ == "__main__":
     if DEBUG:
+        print(f"DEBUG MODE: {DEBUG}")
         uvicorn.run("bot_main:app", host="127.0.0.1", port=8000, reload=True, log_level="debug")
     else:
-        uvicorn.run('bot_main:app', host="0.0.0.1", port=8000, reload=True, log_level="debug")
+        print(f"DEBUG MODE: {DEBUG}")
+        uvicorn.run('bot_main:app', host="0.0.0.0", port=8000, reload=True, log_level="debug")
