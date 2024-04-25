@@ -22,7 +22,10 @@ bot: Bot = Bot(token=BOT_TOKEN)
 dp: Dispatcher = Dispatcher()
 
 WEBHOOK_PATH = f"/bot/{BOT_TOKEN}"
-WEBHOOK_URL = f"{NGROK}{WEBHOOK_PATH}"
+if DEBUG:
+    WEBHOOK_URL = f"{NGROK}{WEBHOOK_PATH}"
+else:
+    WEBHOOK_URL = f"{DOMAIN}{WEBHOOK_PATH}"
 
 
 @asynccontextmanager
