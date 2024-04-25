@@ -74,4 +74,7 @@ async def bot_webhook(update: dict):
 
 
 if __name__ == "__main__":
-    uvicorn.run('bot_main:app', host="127.0.0.1", port=8000, reload=True, log_level="debug")
+    if DEBUG:
+        uvicorn.run("bot_main:app", host="127.0.0.1", port=8000, reload=True, log_level="debug")
+    else:
+        uvicorn.run('bot_main:app', host="0.0.0.1", port=8000, reload=True, log_level="debug")
