@@ -14,41 +14,21 @@ from tg_bot.utils.set_commands import set_main_menu
 
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-DEBUG = os.getenv("DEBUG")
+DEBUG = os.getenv('DEBUG') == 'True'
 NGROK = os.getenv("NGROK")
 DOMAIN = os.getenv("DOMAIN")
 
+bot: Bot = Bot(token=BOT_TOKEN)
+dp: Dispatcher = Dispatcher()
+
 WEBHOOK_PATH = f"/bot/{BOT_TOKEN}"
-if DEBUG:
-    WEBHOOK_URL = f"{NGROK}{WEBHOOK_PATH}"
-else:
-    WEBHOOK_URL = f"{DOMAIN}{WEBHOOK_PATH}"
+WEBHOOK_URL = f"{NGROK}{WEBHOOK_PATH}"
 
 
 @asynccontextmanager
 async def lifespan(application: FastAPI):
     await database.connect()
     logger.info("Database connection established.")
-    load_handlers()
-    await bot.delete_webhook(drop_pending_updates=True)
-    if DEBUG:
-        await dp.start_polling(bot)
-    else:
-        await bot.set_webhook(WEBHOOK_URL)
-    try:
-        yield
-    finally:
-        await database.disconnect()
-        logger.info("Database connection closed.")
-        await bot.session.close()
-
-
-app = FastAPI(lifespan=lifespan)
-bot: Bot = Bot(token=BOT_TOKEN)
-dp: Dispatcher = Dispatcher()
-
-
-def load_handlers() -> None:
     dp.include_routers(
         # пункты меню
         handler_faq.router,
@@ -68,6 +48,18 @@ def load_handlers() -> None:
         handler_inline_main.router,
     )
     dp.startup.register(set_main_menu)
+    await bot.delete_webhook(drop_pending_updates=True)
+    await bot.set_webhook(WEBHOOK_URL)
+    print(f"WEBHOOK URL: {WEBHOOK_URL}")
+    try:
+        yield
+    finally:
+        await database.disconnect()
+        logger.info("Database connection closed.")
+        await bot.session.close()
+
+
+app = FastAPI(lifespan=lifespan)
 
 
 @app.get("/")
@@ -82,7 +74,4 @@ async def bot_webhook(update: dict):
 
 
 if __name__ == "__main__":
-    if DEBUG == "True":
-        uvicorn.run('bot_main:app', host="127.0.0.1", port=8000, reload=True, log_level="debug")
-    else:
-        uvicorn.run('bot_main:app', host='0.0.0.0', port=8000, log_level="debug")
+    uvicorn.run('bot_main:app', host="127.0.0.1", port=8000, reload=True, log_level="debug")
