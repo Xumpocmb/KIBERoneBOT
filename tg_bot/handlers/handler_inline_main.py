@@ -2,6 +2,7 @@ from aiogram import F
 from aiogram import Router
 from aiogram.types import CallbackQuery
 
+from tg_bot.bot_logger import logger
 from tg_bot.keyboards.inline.inline_main import main_inline
 
 router: Router = Router()
@@ -19,6 +20,6 @@ async def process_button_inline_back_to_main(callback: CallbackQuery):
 # отвечает на любой call-back для теста
 @router.callback_query()
 async def process_button_any_faq_question_press(callback: CallbackQuery):
-    print(callback.data)
+    logger.info(f'Callback: {callback.data}')
     await callback.message.delete()
     await callback.answer()

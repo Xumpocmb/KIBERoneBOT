@@ -22,7 +22,6 @@ def make_inline_contact_city_kb() -> InlineKeyboardMarkup:
 # присылаем локации
 def make_inline_contact_location_kb(found_city) -> InlineKeyboardMarkup:
     buttons = []
-
     with Session(autoflush=False, bind=engine) as session:
         results = session.query(Manager).where(Manager.c.city == found_city.city)
     for item in results:

@@ -6,7 +6,7 @@ button_1: InlineKeyboardButton = InlineKeyboardButton(
 
 button_2: InlineKeyboardButton = InlineKeyboardButton(
     text='Состав групп',
-    callback_data='button_2_pressed')
+    callback_data='resident')
 
 button_3: InlineKeyboardButton = InlineKeyboardButton(
     text='Назначить отработку',
@@ -17,7 +17,7 @@ button_4: InlineKeyboardButton = InlineKeyboardButton(
     callback_data='english_platform')
 
 button_5: InlineKeyboardButton = InlineKeyboardButton(
-    text='Наши Акции',
+    text='Наши АКЦИИ для резидентов',
     callback_data='promo')
 
 button_6: InlineKeyboardButton = InlineKeyboardButton(

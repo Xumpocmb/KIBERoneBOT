@@ -1,6 +1,8 @@
 from pydantic import BaseModel
 import databases
 import sqlalchemy
+from sqlalchemy import Table, Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
 
 
 # Настройки базы данных
@@ -75,13 +77,13 @@ Manager = sqlalchemy.Table(
 
 
 Group = sqlalchemy.Table(
-    "Group",
+    "groups",
     metadata,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, autoincrement=True),
     sqlalchemy.Column("FIO", sqlalchemy.String(128)),
+    sqlalchemy.Column("city", sqlalchemy.String(1280)),
     sqlalchemy.Column("group", sqlalchemy.String(1280)),
     sqlalchemy.Column("location", sqlalchemy.String(1280)),
-    sqlalchemy.Column("city", sqlalchemy.String(1280)),
 )
 
 
@@ -89,6 +91,7 @@ Group = sqlalchemy.Table(
 metadata.create_all(engine)
 
 
+# Модели
 class UserModel(BaseModel):
     """модель нужна для создания пользователя"""
     tg_id: str

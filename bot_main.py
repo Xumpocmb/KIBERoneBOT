@@ -9,7 +9,7 @@ from fastapi import FastAPI
 from tg_bot.bot_db import database
 from tg_bot.bot_logger import logger
 from tg_bot.handlers import handler_start, handler_faq, handler_inline_main, handler_promo, handler_partner, \
-    handler_link, handler_contact, handler_english_platform
+    handler_link, handler_contact, handler_english_platform, handler_admin, handler_excel_file, handler_resident
 from tg_bot.utils.set_commands import set_main_menu
 
 load_dotenv()
@@ -50,15 +50,21 @@ dp: Dispatcher = Dispatcher()
 
 def load_handlers() -> None:
     dp.include_routers(
-        handler_start.router,
+        # пункты меню
         handler_faq.router,
         handler_promo.router,
         handler_partner.router,
         handler_link.router,
         handler_contact.router,
         handler_english_platform.router,
-        # этот хендлер должен быть самым последним
-        # иначе последующие хендлеры не сработают
+        handler_resident.router,
+        # обработка файла
+        handler_excel_file.router,
+        # обработка админки
+        handler_admin.router,
+        # обработка старт и др. пользовательских приколов
+        handler_start.router,
+        # этот хендлер должен быть самым последним иначе последующие хендлеры не сработают
         handler_inline_main.router,
     )
     dp.startup.register(set_main_menu)
