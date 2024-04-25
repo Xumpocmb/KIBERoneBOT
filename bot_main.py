@@ -29,6 +29,7 @@ WEBHOOK_URL = f"{NGROK}{WEBHOOK_PATH}"
 async def lifespan(application: FastAPI):
     await database.connect()
     logger.info("Database connection established.")
+    await set_main_menu(bot)
     dp.include_routers(
         # пункты меню
         handler_faq.router,
@@ -47,7 +48,6 @@ async def lifespan(application: FastAPI):
         # этот хендлер должен быть самым последним иначе последующие хендлеры не сработают
         handler_inline_main.router,
     )
-    dp.startup.register(set_main_menu)
     await bot.delete_webhook(drop_pending_updates=True)
     await bot.set_webhook(WEBHOOK_URL)
     print(f"WEBHOOK URL: {WEBHOOK_URL}")
